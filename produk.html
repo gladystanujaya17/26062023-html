@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Latihan membuat layout admin template</title>
+    <link rel="shortcut icon" href="gambar/header-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="blok-kiri">
+            Brand Name
+        </div>
+        <div class="blok-kanan">
+            <span class="margin-x-5"><i class="fa-solid fa-user" style="color: #ffffff;"></i></span>
+            <span class="margin-x-5"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></span>
+            <span class="margin-x-5"><i class="fa-solid fa-bell" style="color: #ffffff;"></i></span>
+        </div>
+    </header>
+
+    <div class="konten">
+        <!-- nav adalah menu konten -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="produk.html">Produk</a></li>
+                <li>
+                    <button class="dropdown-tombol">Report</button>
+                    <ul class="dropdown-isi">
+                        <li><a href="report/penjualan.html">Penjualan</a></li>
+                        <li><a href="report/stok.html">Stok</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        
+
+        <!-- main adalah isi konten -->
+        <main>
+            <div class="halaman-produk"> 
+                ini adalah halaman produk.html
+                <hr>
+                <p id="paragraf">abcdefghijklmnopqrstuvwxyz</p>
+                <hr>
+                <button id="tombol_klik_saya">klik saya</button>
+                <button id="tombol_ganti_warna">ganti background jadi warna kuning</button>
+                <button id="tombol_ganti_warna_putih">ganti background jadi warna putih</button>
+                <script>
+                    // javascript frontend -> fungsi umumnya itu buat manipulasi
+                    // samain lewat ID nya
+                    document.getElementById('tombol_klik_saya').addEventListener('click', function() {
+                        document.getElementById('tombol_klik_saya').innerHTML = 'gladys tanujaya'
+                    })
+                    // ganti lewat class untuk ganti background dengan button
+                    document.getElementById('tombol_ganti_warna').addEventListener('click', function() {
+                        document.getElementsByClassName('halaman-produk')[0].style.background = 'yellow'
+                    })
+                    document.getElementById('tombol_ganti_warna_putih').addEventListener('click', function() {
+                        document.getElementsByClassName('halaman-produk')[0].style.background = 'white'
+                    })
+                    // ini basic document.getElementById
+                    document.getElementById('paragraf').innerHTML = 'kevin tanujaya'
+                    document.getElementById('paragraf').style.color = 'red'
+                </script>
+
+                <h2>Memasukkan Data Lewat Form dan Memanipulasinya</h2>
+                <h3>Form Penjumlahan</h3>
+                <form action="#">
+                    <label>Bilangan Pertama:</label>
+                    <input type="number" id="angka_pertama">
+                    <br>
+                    <br>
+                    <label>Bilangan Kedua:</label>
+                    <input type="number" id="angka_kedua">
+                    <br><br>
+                    <button id="tombol_jumlah">Jumlah</button>
+                    <button id="tombol_ulang">Ulang</button>
+                </form>
+                <br>
+                <hr>
+
+                <h3>Form Pengurangan</h3>
+                <form action="#">
+                    <label>Bilangan Pertama:</label>
+                    <input type="number" id="bilangan_pertama">
+                    <br>
+                    <br>
+                    <label>Bilangan Kedua:</label>
+                    <input type="number" id="bilangan_kedua">
+                    <br><br>
+                    <button id="tombol_kurang">Kurang</button>
+                    <button id="tombol_refresh">Ulang</button>
+                </form>
+                <!-- pada form itu semuanya dikasih ID, kecuali label -->
+
+                <script>
+                    // ini buat mempersingkat waktu yagesya jd document get element nya diluar dulu gitu (global)
+                    let angka_pertama = document.getElementById('angka_pertama')
+                    let angka_kedua = document.getElementById('angka_kedua')
+
+                    // mempersingkat waktu juga tapi ini untuk yang form pengurangan
+                    let bilangan_pertama = document.getElementById('bilangan_pertama')
+                    let bilangan_kedua = document.getElementById('bilangan_kedua')
+
+                    // variabel.value ini bentuknya masih dalam STRING
+                    document.getElementById('tombol_jumlah').addEventListener('click', function() {
+                        // konversi ke integer dulu dengan parseInt, value buat ambil nilainya dari form inputan
+                        let angka_1 = parseInt(angka_pertama.value)
+                        let angka_2 = parseInt(angka_kedua.value)
+                        let hasil = angka_1 + angka_2
+
+                        if(angka_pertama.value == '' && angka_kedua.value == '') {
+                            alert('Form penjumlahan belum diisi')
+                        }
+                        else {
+                            // baru dimasukkan ke alert krn alert ini lbh ke STRING bukan INTEGER
+                            alert('Jumlah ' + angka_pertama.value + '+' + angka_kedua.value + '=' + hasil)
+                        } 
+                    })
+
+                    // add event listener click ini jd kalau diklik itu baru bakal keliatan perubahannya
+                    document.getElementById('tombol_ulang').addEventListener('click', function() {
+                        // hapus isi pada inputan form dengan ''
+                        angka_pertama.value = ''
+                        angka_kedua.value = ''
+                    })
+
+                    document.getElementById('tombol_kurang').addEventListener('click', function() {
+                        let hasil_akhir = Number(bilangan_pertama.value) - Number(bilangan_kedua.value)
+                        if(bilangan_pertama.value == '' && bilangan_kedua.value == '') {
+                            alert('Form pengurangan belum diisi')
+                        }
+                        else {
+                            alert('Hasil:' + bilangan_pertama.value + '-' + bilangan_kedua.value + '=' + hasil_akhir)
+                        }
+                    })
+
+                    // refresh atau ulang
+                    document.getElementById('tombol_refresh').addEventListener('click', function() {
+                        bilangan_pertama.value = ''
+                        bilangan_kedua.value = ''
+                    })
+                </script>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        ini footer
+    </footer>
+
+    <script>
+        /* Loop through all dropdown buttons to toggle 
+        between hiding and showing its dropdown content
+        - This allows the user to have multiple dropdowns 
+        without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-tombol");
+        
+        for (var i=0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+        // console.log ini bakal masuknya ke command, ga bakal muncul kl di html gitu -> ini javascript backend
+
+    </script>
+</body>
+</html>
